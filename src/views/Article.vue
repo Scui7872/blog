@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<div v-if="show">
 		<div class="carousel">
 			<transition-group tag="ul" class="slide-ul" name="slide">
 				<li v-for="(item,index) in slideList"
@@ -52,14 +53,35 @@
 		<div class="load">
 			<img src="../assets/img/more.png" @click="loadMore">
 		</div>
+		
+		<div class="write">
+			<img src="../assets/img/feather.png" @click="changeshow()">
+		</div>
+		</div>
+		<div class="writearticle" v-if="!show">
+				<span style="color: white;">作者ID: {{this.user.id}} </span>		
+				<div class="wr">
+					<div class="wr-top">
+						<input type="text" placeholder="标题:" v-model="writeArticle.title">
+						<input type="text" placeholder="简介:" v-model="writeArticle.content">
+						<input type="text" placeholder="专题ID::" v-model="writeArticle.topicId">
+						<input type="text" placeholder="输入图片地址:" v-model="writeArticle.cover">
+					</div>
+					<div class="wr-body">				
+						<textarea rows="10" cols="30" placeholder="内容:" v-model="writeArticle.text"></textarea>
+						<button @click="changeshow()" v-on:click="release">发布</button>
+					</div>
+				</div>       						
+			</div>
+			
 	</div>
 </template>
 
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
 	export default {
 		data() {
 			return {
+				user: JSON.parse(localStorage.getItem('user')),
 				 articles : [],
 				 slideList: [
 				 	{
@@ -81,7 +103,19 @@
 				 currentIndex: 0,
 				 timer: null,
 				 currentPage: 1,
-				 count: 20
+				 count: 20,
+				 writeArticle: {
+					            userId: '',
+				 				topicId:'',
+				 				title:'',
+								summary:'',
+								thumbnail:'',
+				 				content: '',
+								likes:0,
+				 				comments:0
+				 			},
+				show:'true',
+				watch:'true'
 			}
 		},
 		created() {
@@ -138,7 +172,30 @@
 				if (this.currentIndex > this.slideList.length - 1) {
 					this.currentIndex = 0
 				}
-			}
+			},
+			
+			//发文章
+			release() {
+						if(this.writeArticle.text==''||this.writeArticle.text==''||this.writeArticle.content==''||this.writeArticle.topicId==''){
+							alert("内容不能为空")
+							return;
+						}			
+						this.writeArticle.userId= this.user.id;
+						//alert(this.user.id);
+						// alert(this.comment.content);
+						this.axios.post('http://localhost:8080/api/article/new', this.writeArticle)
+						.then(res => {
+							// alert(res.data.msg);
+							this.$router.go(0);
+						});
+						
+						alert("发布成功")
+						
+					},
+					
+			changeshow(){			
+						this.show=!this.show;
+					},  
 			
 		},
 		computed: {
@@ -240,7 +297,7 @@
 	.card {
 		width: 800px;
 		height: 150px;
-		/* background-color: #AAAAAA; */
+		/* background-color: #FF4500; */
 		display: flex;
 		flex-wrap: wrap;
 		margin-top: 5px;
@@ -316,6 +373,15 @@
 		width: 50px;
 		height: 50px;
 		cursor: pointer;
+	}
+	.write {
+		margin-left: 88%;
+		margin-top: -80%;
+	}
+	
+	.write img{
+		width: 80px;
+		height: 80px;
 	}
 </style>
 

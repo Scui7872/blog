@@ -19,7 +19,7 @@
 
 			<div class="tab-box" v-if="show && selected === 1">
 				<input type="text" placeholder="请设置用户名" v-model="userDto.nickname" />
-				<input type="password" placeholder="请设置6-16位密码" minlength="6" maxlength="16" v-model="userDto.password" />
+				<input type="password" placeholder="请设置3-16位密码" minlength="3" maxlength="16" v-model="userDto.password" />
 				<input type="password" placeholder="请确认密码" minlength="6" maxlength="16" v-model="pwd2" />
 				
 				<input
@@ -184,8 +184,8 @@ export default {
 				return;
 			}
 			// 注册信息完全符合要求则进行下面注册操作
-			this.axios.post('http://localhost:8080/api/register', JSON.stringify(this.userDto)).then(response => {
-				if (response.data.msg == '注册成功') {
+			this.axios.post('http://localhost:8080/api/user/sign-up', JSON.stringify(this.userDto)).then(response => {
+				if (response.data.msg == '成功') {
 					alert('注册成功');
 					// 将后台的用户信息存入本地存储
 					localStorage.user = JSON.stringify(response.data.data);
@@ -195,13 +195,13 @@ export default {
 			});
 			this.axios({
 				method: 'post',
-				url: this.GLOBAL.baseUrl + '/register',
+				url: 'http://localhost:8080/api/user/sign-up',
 				data: JSON.stringify(this.userDto),
 				headers: {
 					'Access-Token': this.token
 				}
 			}).then(res => {
-				if (res.data.msg === '注册成功') {
+				if (res.data.msg === '成功') {
 					alert('注册成功');
 					localStorage.setItem('user', JSON.stringify(res.data.data));
 					this.$router.push('/');

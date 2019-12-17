@@ -61,7 +61,10 @@
 			
 		</div>
 		
-		<div class="right">
+		<div class="change" v-if="show">
+			<img src="../assets/img/change.png" @click="changeshow()">
+		</div>
+		<div class="right" v-if="!show">
 			<div class="r">
 				<h>Modification of personal information:</h>
 			</div>
@@ -85,12 +88,9 @@
 				<p>MailBox：</p>
 				<input type="text" placeholder="邮箱" class="text">
 			</div>
-			<!-- <div class="r-6">
-				<p>Reminder email notification:</p>
-				<input type="radio" name="gender" value="1" class="radio"><h>所有动态</h>
-				<input type="radio" name="gender" value="2" class="radio"><h>未读汇总</h>
-				<input type="radio" name="gender" value="3" class="radio"><h>不接受</h>
-			</div> -->
+			<div class="r-6">
+				<button v-on:click="update()">确定</button>
+			</div>
 			
 		</div>
 	</div>
@@ -101,7 +101,19 @@
 	export default {
 		data() {
 			return {
-				user: JSON.parse(localStorage.user)
+				user: JSON.parse(localStorage.user),
+				show:'true',
+				watch:'true',
+							
+				updateuser:{
+					nickname: '',
+					gender : '',
+					birthday : '',
+					address : '',
+					introduction: '',
+					homepage: '',
+					id: ''
+				}
 			}
 		},
 		created() {
@@ -110,7 +122,19 @@
 		methods: {
 	         getImage(url) {
 				 return 'http://images.weserv.nl/?url=' + url;
-			 }
+			 },
+			 update(){
+			 	this.updateuser.id = this.user.id;
+	     		alert(this.user.id)
+			 	 this.axios.put('http://localhost:8080/api//user/update' , this.updateuser)
+			 	.then(res => {
+			 			this.$router.go(0);
+			 				});
+			 		alert("成功")
+			 },
+			 changeshow(){			
+			 	this.show=!this.show;
+			}    
 		},
 		computed: {
 	
@@ -342,12 +366,20 @@
 		margin-top: -65%;
 		background-color: #000000;
 	}
+	.change {
+		margin-left: 35%;
+		margin-top: 50px;
+	}
+	.change img {
+		width: 100px;
+		height: 100px;
+	}
 	.right {
 		width: 60%;
 		display: flex;
 		flex-direction: column;
 		margin-left: 35%;
-		margin-top: 20px;
+		margin-top:5%;
 		background-color: #FFFF00;
 	}
 	.r {
@@ -394,11 +426,6 @@
 		border-radius: 4px;
 		margin-left: 20px;
 	}
-	
-	/* .radio {
-		margin-top: 8px;
-		margin-left: 20px;
-	} */
 	.r-4 {
 		display: flex;
 		margin-top: 20px;
