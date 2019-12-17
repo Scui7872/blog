@@ -1,0 +1,24 @@
+
+* {
+	margin: 0;
+	padding: 0;
+}
+/* .container {
+	width: 100%;
+	margin: 0 auto;
+} */
+a {
+	text-decoration: none;
+}
+.avatar {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+}
+h2{
+	color: #42B983;
+	font-weight: 500;
+}
+.back-color {
+	border-bottom: 1px solid #DDDDDD;
+}
