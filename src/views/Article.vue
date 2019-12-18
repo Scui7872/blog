@@ -19,6 +19,11 @@
 				 @mouseover="change(index)"></span>
 			</div>
 		</div>
+		
+		<div class="write">
+			<img src="../assets/img/feather.png" @click="changeshow()">
+		</div>
+		
 		<div class="container" v-for="(item,index) in articles" :key="index">
 			<div class="card">
 				<div class="left">
@@ -53,23 +58,32 @@
 		<div class="load">
 			<img src="../assets/img/more.png" @click="loadMore">
 		</div>
-		
-		<div class="write">
-			<img src="../assets/img/feather.png" @click="changeshow()">
-		</div>
-		</div>
+</div>
 		<div class="writearticle" v-if="!show">
-				<span style="color: white;">作者ID: {{this.user.id}} </span>		
+				<span style="margin-left: 10%; color: #005C5F;font-size:18px;">我的ID: {{this.user.id}} </span>		
 				<div class="wr">
 					<div class="wr-top">
-						<input type="text" placeholder="标题:" v-model="writeArticle.title">
-						<input type="text" placeholder="简介:" v-model="writeArticle.content">
-						<input type="text" placeholder="专题ID::" v-model="writeArticle.topicId">
-						<input type="text" placeholder="输入图片地址:" v-model="writeArticle.cover">
+						<div class="t-1">
+							<div class="t-a">
+								<p>文章标题:</p>
+								<input type="text" placeholder="给你的文章想一个名字吧" v-model="writeArticle.title" class="one">
+							</div>
+							<div class="t-b">
+								<p>文章简介:</p>
+								<textarea rows="4" cols="80" placeholder="简单介绍一下你的文章吧" v-model="writeArticle.content" class="intro"></textarea>
+							</div>
+						</div>
+						<div class="t-2">
+							<input type="text" placeholder="专题ID" v-model="writeArticle.topicId" class="two">
+							<input type="text" placeholder="图片地址" v-model="writeArticle.cover" class="three">
+						</div>
 					</div>
-					<div class="wr-body">				
-						<textarea rows="10" cols="30" placeholder="内容:" v-model="writeArticle.text"></textarea>
-						<button @click="changeshow()" v-on:click="release">发布</button>
+					<div class="wr-body">
+						<div class="b-1">
+							<p>文章内容:</p>
+							<textarea rows="20" cols="120" placeholder="把你的想法写在这里吧" v-model="writeArticle.text"></textarea>
+						</div>
+						<button @click="changeshow()" v-on:click="release" class="myButton">发布</button>
 					</div>
 				</div>       						
 			</div>
@@ -376,12 +390,185 @@
 	}
 	.write {
 		margin-left: 88%;
-		margin-top: -80%;
+		position: sticky;
+		top:250px;
+		cursor: pointer;
 	}
 	
 	.write img{
 		width: 80px;
 		height: 80px;
+	}
+	
+	.writearticle {
+		height: 800px;
+	}
+	.wr {
+		width: 90%;
+		margin-left: 5%;
+		margin-top: 20px;
+		border: 2px solid rgb(235, 111, 90);
+		box-shadow: 2px 5px 8px #aaa;
+		border-radius: 5px;
+		height: 700px;
+		background-color:rgb(235, 111, 90);
+	}
+	.wr-top {
+		width: 90%;
+		margin-left: 5%;
+		display: flex;
+		flex-direction: column;
+		/* background-color: #F1FA8C; */
+	}
+	.t-1 {
+		display: flex;
+		flex-direction: column;
+	}
+	.t-a {
+		display: flex;
+	}
+	.t-a p {
+		margin-top: 20px;
+		font-size: 18px;
+		color: #002B36;
+	}
+	.one {
+		width: 20%;
+		margin-top: 20px;
+		margin-left: 10px;
+		height: 20px;
+		border: 1px solid rgb(56, 188, 183);
+		padding: 2px 0px;
+		border-radius: 2px;
+		padding-left:5px;
+		color: #008B8B;
+		font-weight: 500;
+		font-size: 15px;
+		-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+		transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+	}
+	.one:focus{
+	    outline: 0;
+	    box-shadow: inset 0 1px 1px #F0F0F0,0 0 8px #F0F0F0;
+	}
+	.t-b {
+		display: flex;
+	}
+	.t-b p {
+		margin-top:20px;
+		font-size: 18px;
+		color: #002B36;
+	}
+	.intro {
+		width: 80%;
+		margin-left: 1%;
+		margin-top: 20px;
+		border: 1px solid rgb(56, 188, 183);
+		padding: 2px 0px;
+		border-radius: 2px;
+		padding-left:5px;
+		color: #008B8B;
+		font-weight: 500;
+		font-size: 15px;
+		-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+		transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+	}
+	.intro:focus {
+		outline: 0;
+		box-shadow: inset 0 1px 1px #F0F0F0,0 0 8px #F0F0F0;
+	}
+	.t-2 {
+		justify-content: space-around;
+	}
+	.two {
+		margin-top: 10px;
+		margin-left: 20%;
+		height: 20px;
+		width: 100px;
+		border: 1px solid rgb(56, 188, 183);
+		padding: 2px 0px;
+		border-radius: 2px;
+		padding-left:5px;
+		color: #008B8B;
+		font-weight: 500;
+		font-size: 15px;
+		-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+		transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+	}
+	.two:focus {
+		outline: 0;
+		box-shadow: inset 0 1px 1px #F0F0F0,0 0 8px #F0F0F0;
+	}
+	.three {
+		margin-left: 10%;
+		height: 20px;
+		width: 300px;
+		border: 1px solid rgb(56, 188, 183);
+		padding: 2px 0px;
+		border-radius: 2px;
+		padding-left:5px;
+		color: #008B8B;
+		font-weight: 500;
+		font-size: 15px;
+		-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+		transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+	}
+	.three:focus {
+		outline: 0;
+	    box-shadow: inset 0 1px 1px #F0F0F0,0 0 8px #F0F0F0;
+    }
+	.wr-body {
+		width: 90%;
+		display: flex;
+		flex-direction: column;
+		margin-left: 5%;
+		/* background-color: #F22C40; */
+	}
+	.b-1 {
+		display: flex;
+	}
+	.b-1 p {
+		margin-top: 20px;
+		font-size: 18px;
+		color: #002B36;
+	}
+	textarea {
+		width: 80%;
+		margin-left: 5%;
+		margin-top: 20px;
+		border: 1px solid rgb(56, 188, 183);
+		padding: 2px 0px;
+		border-radius: 2px;
+		padding-left:5px;
+		color: #008B8B;
+		font-weight: 500;
+		font-size: 18px;
+		font-family:Times New Roman;
+		-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+		transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+	}
+	textarea:focus {
+		outline: 0;
+		box-shadow: inset 0 1px 1px #F0F0F0,0 0 8px #F0F0F0;
+	}
+	.myButton {
+		width: 10%;
+		margin-left: 42%;
+		margin-top: 20px;
+		box-shadow: -1px 7px 20px -6px rgb(55, 188, 183);
+		background:linear-gradient(to bottom, rgb(55, 188, 183) 5%, rgb(55, 188, 183) 100%);
+		background-color:rgb(55, 188, 183);
+		border-radius:9px;
+		border:1px solid #ffffff;
+		display:inline-block;
+		cursor:pointer;
+		color:#ffffff;
+		font-family:Times New Roman;
+		font-size:12px;
+		font-weight:bold;
+		padding:10px 22px;
+		text-decoration:none;
+		text-shadow:0px 0px 6px #b23e35;
 	}
 </style>
 

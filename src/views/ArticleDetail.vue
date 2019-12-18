@@ -54,7 +54,7 @@
 										</p>
 									</div>
 									<div class="card-l-2">
-										<button class="del" @click="del(item.comment.id)">删除</button>
+										<button class="del" @click="del(item.comment.id,item.comment.userId)">删除</button>
 									</div>
 								</div>
 						</div>
@@ -139,8 +139,11 @@
 				this.$router.go(0);
 			});
 		},
-		del(id) {
-			alert(id);
+		del(id,userId) {
+			if(userId != this.user.id){
+				alert('不能删')
+				return;
+			}
 			this.axios.delete('http://localhost:8080/api/comments/delete/' + id).then(res => {
 				this.$router.go(0);
 			});

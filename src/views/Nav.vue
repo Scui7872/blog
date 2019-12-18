@@ -20,7 +20,7 @@
 					<li class="nav-item" v-if="this.user" @click="logout" id="logout">logout</li>
 				</ul>
 				<li class="nav-item"><input type="text" class="input-box" placeholder="搜索" v-model="keywords" /></li>
-				<li class="nav-item"><button class="btn btn-lg btn-rd dark-border" @click="search">搜索</button></li>
+				<li class="nav-item"><img src="../assets/img/search.png" @click="search" class="search"></li>
 			</div>
 		</div>
 		<router-view class="main" />
@@ -165,5 +165,26 @@
 	
 	.dropdown:hover .dropbtn {
 	    background-color: rgb(0, 139, 139);
+	}
+	.input-box {
+		width: 130px;
+		height: 20px;
+		border: 1px solid rgb(56, 188, 183);
+		padding: 2px 0px;
+		border-radius: 2px;
+		padding-left:5px;
+		color: #008B8B;
+		font-weight: 500;
+		-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+		transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+	}
+	.input-box:focus{
+	    outline: 0;
+	    box-shadow: inset 0 1px 1px #F0F0F0,0 0 8px #F0F0F0;
+	}
+	.search {
+		width: 25px;
+		height: 25px;
+		cursor: pointer;
 	}
 </style>

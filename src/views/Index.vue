@@ -65,10 +65,6 @@
 			    <div class="link-th" v-for="(item,index) in articles" :key="index">
 				<div class="card">
 				 <img :src="item.author.avatar" class="img">
-				 <button @click="show = !show" class="btn">Know more</button>
-				 <transition name="slide-fade" v-if="show">
-					 <p class="slide">{{item.article.title}}</p>
-				 </transition>
 				</div>
 			</div>
 		</div>
@@ -79,10 +75,6 @@
 			    <div class="link-th" v-for="(item,index) in articles" :key="index">
 				<div class="card">
 				 <img :src="item.topic.logo" class="img">
-				<!-- <button @click="show = !show" class="btn">Know more</button>
-				 <transition name="slide-fade" v-if="show">
-				 <p class="slide">{{item.topic.topicName}}</p>
-				 </transition> -->
 				</div>
 			</div>
 		</div>
@@ -127,8 +119,8 @@
 	export default {
 		data() {
 			return {
-				 articles : [],
-				 show: false,
+				 articles : []
+				 // show: false,
 			}
 		},
 		

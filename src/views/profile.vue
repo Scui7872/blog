@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="top">
-			<img src="../assets/img/26.jpg">
+			<img src="../assets/img/29.jpg">
 		</div>
 		<div class="left">
 			<div class="body">
@@ -78,7 +78,7 @@
 			</div>
 			<div class="r-3">
 				<p>Personal profile:</p>
-				<textarea id="textarea" rows="1" placeholder="填写你的个人简介" maxlength="500"></textarea>
+				<textarea id="textarea" rows="1" placeholder="让更多人了解你吧" maxlength="500"></textarea>
 			</div>
 			<div class="r-4">
 				<p>Phone Number：</p>
@@ -373,6 +373,7 @@
 	.change img {
 		width: 100px;
 		height: 100px;
+		cursor: pointer;
 	}
 	.right {
 		width: 60%;
