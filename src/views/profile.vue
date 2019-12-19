@@ -7,11 +7,22 @@
 			<div class="body">
 				<img :src="user.avatar">
 				<div class="l-1">
-					<p>{{user.nickname}}</p>
+					<div class="name"><p>{{user.nickname}}</p></div>
+					<div class="gender"><p>{{user.gender}}</p></div>
 				</div>
 				<div class="l-2">
-					<p>Signature:</p>
-				    <h>{{user.introduction.substring(0,17)}}</h>
+					<div class="L">
+						<p>出生年月:</p>
+						<h>{{user.birthday.year}}年{{user.birthday.month}}月{{user.birthday.day}}日</h>
+					</div>
+					<div class="O">
+						<p>家庭住址:</p>
+						<h>{{user.address}}</h>
+					</div>
+					<div class="V">
+						<p>Signature:</p>
+						<h>{{user.introduction}}</h>
+					</div>
 				</div>
 				<div class="l-3">
 					<p>注册于{{user.createTime.date.year}}.{{user.createTime.date.month}}.{{user.createTime.date.day}}</p>
@@ -58,7 +69,7 @@
 		</div>
 		
 		<div class="music">
-			
+	
 		</div>
 		
 		<div class="change" v-if="show">
@@ -68,28 +79,49 @@
 			<div class="r">
 				<h>Modification of personal information:</h>
 			</div>
+			
+			<div class="homepage">
+				<p>主页:</p>
+				<input type="text" placeholder="主页" v-model="updateuser.homepage">
+			</div>
 			<div class="r-1">
 				<p>Nickname:</p>
-				<input type="text" placeholder="新昵称" class="text">
+				<input type="text" placeholder="新昵称" class="text" v-model="updateuser.nickname">
 			</div>
 			<div class="r-2">
 				<p>Address:</p>
-				<input type="text" placeholder="新住址" class="text">
+				<input type="text" placeholder="新住址" class="text" v-model="updateuser.address">
+				<!-- <select id="city-select" hidefocus="true" v-model="updateuser.address">  
+								 	 	 	 <option value="北京">北京</option> 
+								 	 	 	 <option value="天津">天津</option> 
+								 	  	     <option value="河北">河北</option> 				 	 	 	       
+								 	 	     <option value="上海">上海</option> 
+								 	 	 	 <option value="江苏">江苏</option> 
+								 	         <option value="浙江">浙江</option> 				 
+								 	 	 	 <option value="安徽">安徽</option> 
+								 	         <option value="新疆">新疆</option> 				 	 	 	      
+								 	 	 	 <option value="贵州">贵州</option> 				 	 	 	     
+								 	 	 	 <option value="台湾">台湾</option> 
+								 	 	 	 <option value="澳门">澳门</option> 				
+								 	 	     <option value="香港">香港</option> 
+								 	         <option value="其他">其他</option> 				
+			    </select> 	 -->
+				
 			</div>
 			<div class="r-3">
 				<p>Personal profile:</p>
-				<textarea id="textarea" rows="1" placeholder="让更多人了解你吧" maxlength="500"></textarea>
+				<textarea id="textarea" rows="1" placeholder="让更多人了解你吧" maxlength="500" v-model="updateuser.introduction"></textarea>
 			</div>
 			<div class="r-4">
-				<p>Phone Number：</p>
-				<input type="text" placeholder="手机号" class="text">
+				<p>Your gender:</p>
+				<input type="text" placeholder="性别" class="text" v-model="updateuser.gender">
 			</div>
 			<div class="r-5">
-				<p>MailBox：</p>
-				<input type="text" placeholder="邮箱" class="text">
+				<p>Date of birth:</p>
+				<input type="date" class="text" v-model="updateuser.birthday">
 			</div>
 			<div class="r-6">
-				<button v-on:click="update()">确定</button>
+				<button v-on:click="update()" class="myButton">确定</button>
 			</div>
 			
 		</div>
@@ -111,7 +143,7 @@
 					birthday : '',
 					address : '',
 					introduction: '',
-					homepage: '',
+					homepage: '水水',
 					id: ''
 				}
 			}
@@ -126,7 +158,7 @@
 			 update(){
 			 	this.updateuser.id = this.user.id;
 	     		alert(this.user.id)
-			 	 this.axios.put('http://localhost:8080/api//user/update' , this.updateuser)
+			 	 this.axios.put('http://localhost:8080/api/user/update' , this.updateuser)
 			 	.then(res => {
 			 			this.$router.go(0);
 			 				});
@@ -170,23 +202,34 @@
 	}
 	.l-1 {
 		width:100%;
-		margin-top: 20%;
+		margin-top: 10%;
+		display: flex;
+		justify-content: space-around;
 		/* background-color: #000080; */
 	}
-	.l-1 p {
-		font-size: 20px;
+	.name {
+		margin-left:80px;
+		font-size: 24px;
+	}
+	.gender {
+		margin-top: 5px;
+		margin-left: -10px;
+		color:#004444;
 	}
 	.l-2 {
 		width:100%;
+		margin-top: 20px;
 		/* background-color: #002B36; */
 	}
 	.l-2 p {
+		font-weight: 800;
 		font-size: 16px;
 		margin-top: 2px;
 	}
 	.l-2 h {
+		font-weight: 500;
 		font-size: 16px;
-		color: #333333;
+		color:#004444;
 	}
 	.l-3 {
 		width:100%;
@@ -195,7 +238,7 @@
 	.l-3 p {
 		font-size: 14px;
 		color: #darkgray;
-		margin-top: 2px;
+		margin-top: 10px;
 	}
 	.l-4 {
 		width:100%;
@@ -366,6 +409,7 @@
 		margin-top: -65%;
 		background-color: #000000;
 	}
+	
 	.change {
 		margin-left: 35%;
 		margin-top: 50px;
@@ -377,11 +421,13 @@
 	}
 	.right {
 		width: 60%;
+		height: 600px;
 		display: flex;
 		flex-direction: column;
 		margin-left: 35%;
 		margin-top:5%;
-		background-color: #FFFF00;
+		background-color: rgb(237, 115, 136);
+		border-radius: 5px;
 	}
 	.r {
 		font-size: 26px;
@@ -408,6 +454,18 @@
 		height: 20px;
 		margin-left: 20px;
 		font-family: STXihei;
+		height: 20px;
+		border: 1px solid rgb(56, 188, 183);
+		padding: 2px 0px;
+		border-radius: 2px;
+		padding-left:5px;
+		color: #008B8B;
+		-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+		transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+	}
+	.text:focus{
+	    outline: 0;
+	    box-shadow: inset 0 1px 1px #F0F0F0,0 0 8px #F0F0F0;
 	}
 	.r-3 {
 		display: flex;
@@ -425,7 +483,18 @@
 		font-size: 18px;
 		font-family: STXihei;
 		border-radius: 4px;
-		margin-left: 20px;
+		margin-left: 5px;
+		border: 1px solid rgb(56, 188, 183);
+		padding: 2px 0px;
+		border-radius: 2px;
+		padding-left:5px;
+		color: #008B8B;
+		-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+		transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+	}
+	textarea:focus{
+	    outline: 0;
+	    box-shadow: inset 0 1px 1px #F0F0F0,0 0 8px #F0F0F0;
 	}
 	.r-4 {
 		display: flex;
@@ -447,5 +516,32 @@
 	}
 	.r-6 p {
 		font-size: 20px;
+	}
+	.myButton {
+		margin-left: 43%;
+		margin-top: 5%;
+		border: 1px solid rgb( 0, 105, 92);
+		box-shadow: 0px 10px 15px -6px rgb(0, 121, 107);
+		background:linear-gradient(to bottom, rgb(0, 121, 107) 5%, rgb(0, 121, 107) 100%);
+		border-radius:6px;
+		display:inline-block;
+		cursor:pointer;
+		color:#ffffff;                         
+		font-family:Arial;
+		font-size:20px;
+		font-weight:bold;
+		padding:10px 25px;
+		text-decoration:none;
+	}
+	.myButton:hover {
+		background:linear-gradient(to bottom, rgb( 0, 105, 92) 5%, rgb( 0, 105, 92) 100%);
+		background-color:rgb( 0, 105, 92);
+	}
+	.myButton:active {
+		position:relative;
+		top:1px;
+	}
+    .homepage {
+		opacity: 0;
 	}
 </style>

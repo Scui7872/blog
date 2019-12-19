@@ -12,7 +12,8 @@
 					</div>
 				</div>	
 				<div class="c-last"><p>来自于专题:{{ item.topic.topicName }}</p></div>	
-				<div class="c-right"><button class="myButton">进入阅读</button></div>
+				<div class="c-right">
+					<button class="myButton">进入阅读</button></div>
 			</div>
 		</div>
 </template>

@@ -140,6 +140,7 @@
 	    position: relative;
 	    display: inline-block;
 		margin-left:20px;
+		border-radius: 2px;
 	}
 
 	.dropdown-content {

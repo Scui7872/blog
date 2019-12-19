@@ -8,7 +8,7 @@
 
 			<div class="tab-box" v-if="show && selected === 0">
 				<input type="text" placeholder="请输入手机号/邮箱" v-model="userDto.mobile" />
-				<input type="password" placeholder="请输入6-16位密码" minlength="6" maxlength="16" v-model="userDto.password" />
+				<input type="password" placeholder="请输入3-16位密码" minlength="3" maxlength="16" v-model="userDto.password" />
 				<div class="code-box">
 					<input type="text" placeholder="请输入验证码" v-model="userDto.code" />
 					<div class="img"><img ref="codeImg" @click="refresh()" style="cursor: pointer;" /></div>

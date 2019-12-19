@@ -12,7 +12,7 @@
 						<div class="two">{{ item.follows }}人关注</div>
 					</div>
 				</div>
-				<div class="c-right"><button class="myButton">进入阅读</button></div>
+				<div class="c-right"><button class="myButton">进入列表</button></div>
 		</div>
 	</div>
 </template>
